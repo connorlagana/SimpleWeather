@@ -38,7 +38,7 @@ class Weather extends Component {
     return (
       <View style={styles.weatherContainer} >
         <View style={styles.headerContainer}>
-          <MaterialCommunityIcons size={48} name="weather-sunny" color={'#fff'} />
+          <MaterialCommunityIcons size={48} name="weather-night" color={'#fff'} />
           <Text style={styles.cityText}>{this.state.name}</Text>
         </View>
         <View style={styles.bodyContainer}>
@@ -55,7 +55,7 @@ class Weather extends Component {
 const styles = StyleSheet.create({
   weatherContainer: {
     flex: 1,
-    backgroundColor: '#f7b033'
+    backgroundColor: '#4e6696'
   },
   headerContainer: {
     flex: 1,
