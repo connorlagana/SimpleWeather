@@ -1,37 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios'
 
-const Weather = () => {
+class Weather extends Component {
+  constructor(props) {
+    super(props)
 
-  return (
-    <View style={styles.weatherContainer}>
-      <View style={styles.headerContainer}>
-        <MaterialCommunityIcons size={48} name="weather-sunny" color={'#fff'} />
-        <Text style={styles.cityText}>San Antonio</Text>
-      </View>
-      <View style={styles.bodyContainer}>
-        <Text style={styles.temp}>82°</Text>
-        <Text style={styles.subtitle}>Sunny all day!</Text>
-      </View>
-    </View>
-  );
-};
-
-async function fetchWeatherData() {
-  try {
-    let response = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=London&apikey=4e18a7bd71bb6257607ec44ce1dfe75c`,
-    );
-    let responseJson = await response.json()
-    console.log(responseJson)
-    return responseJson;
-  } catch (error) {
-    console.error(error)
   }
 
-}
+  componentDidMount() {
+    async function fetchWeatherData() {
+      try {
+        let response = await fetch(
+          `http://api.openweathermap.org/data/2.5/weather?q=London&apikey=4e18a7bd71bb6257607ec44ce1dfe75c`,
+        );
+        let responseJson = await response.json()
+        console.log(responseJson)
+        return responseJson;
+      } catch (error) {
+        console.error(error)
+      }
+    
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.weatherContainer} >
+        <View style={styles.headerContainer}>
+          <MaterialCommunityIcons size={48} name="weather-sunny" color={'#fff'} />
+          <Text style={styles.cityText}>San Antonio</Text>
+        </View>
+        <View style={styles.bodyContainer}>
+          <Text style={styles.temp}>82°</Text>
+          <Text style={styles.subtitle}>Sunny all day!</Text>
+        </View>
+      </View>
+    );
+  }
+};
+
+
 
 const styles = StyleSheet.create({
   weatherContainer: {
