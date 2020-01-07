@@ -7,11 +7,11 @@ const Weather = () => {
     <View style={styles.weatherContainer}>
       <View style={styles.headerContainer}>
         <MaterialCommunityIcons size={48} name="weather-sunny" color={'#fff'} />
-        <Text style={styles.tempText}>Temperature˚</Text>
+        <Text style={styles.cityText}>San Francisco</Text>
       </View>
       <View style={styles.bodyContainer}>
-        <Text style={styles.title}>So Sunny</Text>
-        <Text style={styles.subtitle}>It hurts my eyes!</Text>
+        <Text style={styles.temp}>82°</Text>
+        <Text style={styles.subtitle}>Sunny all day!</Text>
       </View>
     </View>
   );
@@ -20,14 +20,14 @@ const Weather = () => {
 const styles = StyleSheet.create({
   weatherContainer: {
     flex: 1,
-    backgroundColor: '#f7b733'
+    backgroundColor: '#f7b033'
   },
   headerContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  tempText: {
+  cityText: {
     fontSize: 48,
     color: '#fff'
   },
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     marginBottom: 40
   },
-  title: {
+  temp: {
     fontSize: 48,
     color: '#fff'
   },
