@@ -10,20 +10,24 @@ class Weather extends Component {
     this.state = {
       name: '',
       temp: '',
+      feelsLike: '',
       main: ''
     }
 
   }
   async fetchWeatherData() {
-    const res = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=Dallas&apikey=4e18a7bd71bb6257607ec44ce1dfe75c`)
+    const res = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=Seattle&apikey=4e18a7bd71bb6257607ec44ce1dfe75c`)
 
     const tempInKelvin = res.data.main.temp
+    const feelsLikeKelvin = res.data.main.feels_like
 
     const tempInF = Math.round((tempInKelvin - 273.15) * 9 / 5 + 32)
+    const feelsLikeF = Math.round((feelsLikeKelvin - 273.15) * 9 / 5 + 32)
 
     this.setState({
       name: res.data.name,
       temp: tempInF,
+      feelsLike: feelsLikeF,
       main: res.data.weather[0].main,
       description: res.data.weather[0].description
     })
