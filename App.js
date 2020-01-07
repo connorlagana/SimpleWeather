@@ -7,22 +7,31 @@ class Weather extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      name: '',
+      temp: '',
+      main: ''
+    }
+
+  }
+  async fetchWeatherData() {
+    const res = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=Dallas&apikey=4e18a7bd71bb6257607ec44ce1dfe75c`)
+
+    const tempInKelvin = res.data.main.temp
+
+    const tempInF = Math.round((tempInKelvin - 273.15) * 9 / 5 + 32)
+
+    this.setState({
+      name: res.data.name,
+      temp: tempInF,
+      main: res.data.weather[0].main,
+      description: res.data.weather[0].description
+    })
+
   }
 
   componentDidMount() {
-    async function fetchWeatherData() {
-      try {
-        let response = await fetch(
-          `http://api.openweathermap.org/data/2.5/weather?q=London&apikey=4e18a7bd71bb6257607ec44ce1dfe75c`,
-        );
-        let responseJson = await response.json()
-        console.log(responseJson)
-        return responseJson;
-      } catch (error) {
-        console.error(error)
-      }
-    
-    }
+    this.fetchWeatherData()
   }
 
   render() {
@@ -30,11 +39,11 @@ class Weather extends Component {
       <View style={styles.weatherContainer} >
         <View style={styles.headerContainer}>
           <MaterialCommunityIcons size={48} name="weather-sunny" color={'#fff'} />
-          <Text style={styles.cityText}>San Antonio</Text>
+          <Text style={styles.cityText}>{this.state.name}</Text>
         </View>
         <View style={styles.bodyContainer}>
-          <Text style={styles.temp}>82°</Text>
-          <Text style={styles.subtitle}>Sunny all day!</Text>
+          <Text style={styles.temp}>{this.state.temp}°</Text>
+          <Text style={styles.subtitle}>{this.state.description}</Text>
         </View>
       </View>
     );
